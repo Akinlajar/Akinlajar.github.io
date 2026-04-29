@@ -460,7 +460,8 @@ body.dark-mode .timeline-place{color:var(--text-dim)}
 body.dark-mode .lens-card{background:var(--cream);border-color:var(--rule);border-left-color:var(--gold-dark)}
 body.dark-mode .lens-card:hover{background:var(--cream-warm);border-left-color:var(--gold)}
 body.dark-mode .lens-card h3{color:var(--gold-light)}
-body.dark-mode .anchor-btn{background:var(--gold-dark);border-color:var(--gold-dark);color:var(--paper)}
+body.dark-mode .anchor-btn{background:var(--gold);border-color:var(--gold);color:var(--navy-deep)}
+body.dark-mode .anchor-btn:hover{background:var(--gold-light);border-color:var(--gold-light);color:var(--navy-deep)}
 body.dark-mode .anchor-btn.secondary{background:transparent;color:var(--gold);border-color:var(--gold-dark)}
 body.dark-mode .anchor-btn.secondary:hover{background:var(--gold-dark);color:var(--paper)}
 body.dark-mode .more-repos{background:var(--cream);border-color:var(--rule)}
@@ -471,32 +472,65 @@ body.dark-mode .placeholder-card{border-color:var(--rule);color:var(--text-dim);
 body.dark-mode .hero h1{color:var(--gold-light)}
 body.dark-mode .section-subtitle{color:var(--text-dim)}
 
-/* Theme toggle button */
-.theme-toggle{
-  background:none;
-  border:1px solid var(--rule);
-  border-radius:4px;
-  width:36px;
-  height:36px;
-  cursor:pointer;
+/* Theme toggle switch */
+.theme-switch{
   display:flex;
   align-items:center;
-  justify-content:center;
-  color:var(--gold-dark);
-  transition:all 0.25s;
-  padding:0;
+  gap:0.5rem;
+  cursor:pointer;
   flex-shrink:0;
+  user-select:none;
 }
-.theme-toggle:hover{
-  border-color:var(--gold);
-  color:var(--gold);
-  background:rgba(200,169,100,0.08);
+.theme-switch .switch-label{
+  font-family:'Inter',sans-serif;
+  font-size:0.68rem;
+  font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  transition:color 0.25s;
 }
-.theme-toggle svg{width:18px;height:18px}
-.theme-toggle .sun{display:none}
-.theme-toggle .moon{display:block}
-body.dark-mode .theme-toggle .sun{display:block}
-body.dark-mode .theme-toggle .moon{display:none}
+.theme-switch:hover .switch-label{color:var(--gold-dark)}
+.switch-track{
+  width:44px;
+  height:24px;
+  background:var(--rule);
+  border-radius:12px;
+  position:relative;
+  transition:background 0.3s;
+  border:1px solid var(--rule);
+}
+.switch-track::after{
+  content:'';
+  position:absolute;
+  top:2px;
+  left:2px;
+  width:18px;
+  height:18px;
+  background:var(--paper);
+  border-radius:50%;
+  transition:all 0.3s;
+  box-shadow:0 1px 3px rgba(0,0,0,0.15);
+}
+body.dark-mode .switch-track{
+  background:var(--gold-dark);
+  border-color:var(--gold-dark);
+}
+body.dark-mode .switch-track::after{
+  left:22px;
+  background:var(--navy-deep);
+}
+.switch-icon{
+  width:16px;
+  height:16px;
+  color:var(--gold-dark);
+  transition:color 0.25s;
+}
+body.dark-mode .switch-icon{color:var(--gold)}
+.theme-switch .icon-sun{display:none}
+.theme-switch .icon-moon{display:block}
+body.dark-mode .theme-switch .icon-sun{display:block}
+body.dark-mode .theme-switch .icon-moon{display:none}
 
 </style>
 </head>
@@ -513,10 +547,11 @@ body.dark-mode .theme-toggle .moon{display:none}
       <li><a href="../writing.html">Writing</a></li>
       <li><a href="../index.html#contact">Contact</a></li>
     </ul>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-      </button>
+      <div class="theme-switch" onclick="toggleTheme()" role="button" aria-label="Toggle dark mode" tabindex="0">
+        <svg class="switch-icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <div class="switch-track"></div>
+        <svg class="switch-icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </div>
   </div>
 </nav>
 
