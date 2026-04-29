@@ -52,7 +52,7 @@ body::before{
   inset:0;
   pointer-events:none;
   opacity:0.025;
-  z-index:100;
+  z-index:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -1035,6 +1035,52 @@ body.dark-mode .carousel-btn{background:var(--gold);color:var(--navy-deep)}
 .section{margin-bottom:3.5rem}
 .layout{padding:2rem 2.5rem 3rem}
 @media(max-width:768px){.layout{padding:1.2rem 1rem 2rem}}
+
+/* === Mobile Menu (standalone, outside nav) === */
+.mobile-menu{
+  display:none;
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:#0f1e38;
+  z-index:9999;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:0.5rem;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu-close{
+  position:absolute;
+  top:1.5rem;right:1.5rem;
+  color:var(--gold);
+  font-size:2.5rem;
+  cursor:pointer;
+  padding:10px;
+  line-height:1;
+  -webkit-tap-highlight-color:rgba(200,169,100,0.3);
+}
+.mobile-menu-item{
+  color:#b8b0a0;
+  font-family:'Inter',sans-serif;
+  font-size:1.2rem;
+  font-weight:500;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:1rem 2rem;
+  cursor:pointer;
+  -webkit-tap-highlight-color:rgba(200,169,100,0.3);
+  user-select:none;
+  text-align:center;
+  min-width:250px;
+}
+.mobile-menu-item:active{
+  color:var(--gold);
+  background:rgba(200,169,100,0.1);
+  border-radius:4px;
+}
+@media(min-width:769px){
+  .mobile-menu{display:none!important}
+}
 </style>
 </head>
 <body>
@@ -1042,13 +1088,13 @@ body.dark-mode .carousel-btn{background:var(--gold);color:var(--navy-deep)}
   <div class="nav-inner">
     <a href="index.html" class="brand">Judah Akinlaja <span class="divider">/</span> <span class="role">Health Data Scientist</span></a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="qualifications.html">Qualifications</a></li>
-      <li><a href="experience.html" class="active">Experience</a></li>
-      <li><a href="publications.html">Publications</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="index.html" onclick="window.location.href='index.html';return true;">Home</a></li>
+      <li><a href="about.html" onclick="window.location.href='about.html';return true;">About</a></li>
+      <li><a href="portfolio.html" onclick="window.location.href='portfolio.html';return true;">Portfolio</a></li>
+      <li><a href="qualifications.html" onclick="window.location.href='qualifications.html';return true;">Qualifications</a></li>
+      <li><a href="experience.html" class="active" onclick="window.location.href='experience.html';return true;">Experience</a></li>
+      <li><a href="publications.html" onclick="window.location.href='publications.html';return true;">Publications</a></li>
+      <li><a href="index.html#contact" onclick="window.location.href='index.html#contact';return true;">Contact</a></li>
     </ul>
       <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -1060,7 +1106,16 @@ body.dark-mode .carousel-btn{background:var(--gold);color:var(--navy-deep)}
       </div>
   </div>
 </nav>
-<div class="overlay" onclick="toggleMenu()"></div>
+<div id="mobileMenu" class="mobile-menu">
+  <div class="mobile-menu-close" ontouchend="closeMobileMenu()" onclick="closeMobileMenu()">&times;</div>
+  <div class="mobile-menu-item" style="" ontouchend="window.location.href='index.html'" onclick="window.location.href='index.html'">Home</div>
+  <div class="mobile-menu-item" style="" ontouchend="window.location.href='about.html'" onclick="window.location.href='about.html'">About</div>
+  <div class="mobile-menu-item" style="" ontouchend="window.location.href='portfolio.html'" onclick="window.location.href='portfolio.html'">Portfolio</div>
+  <div class="mobile-menu-item" style="" ontouchend="window.location.href='qualifications.html'" onclick="window.location.href='qualifications.html'">Qualifications</div>
+  <div class="mobile-menu-item" style="color:var(--gold);font-weight:700;" ontouchend="window.location.href='experience.html'" onclick="window.location.href='experience.html'">Experience</div>
+  <div class="mobile-menu-item" style="" ontouchend="window.location.href='publications.html'" onclick="window.location.href='publications.html'">Publications</div>
+  <div class="mobile-menu-item" style="" ontouchend="window.location.href='index.html#contact'" onclick="window.location.href='index.html#contact'">Contact</div>
+</div>
 
 <div class="layout">
   <main class="main">
@@ -1144,18 +1199,14 @@ function toggleTheme(){
 })();
 
 function toggleMenu(){
-  document.querySelector('.nav-links').classList.toggle('open');
-  document.querySelector('.hamburger').classList.toggle('open');
-  document.querySelector('.overlay').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.add('open');
+  document.body.style.overflow='hidden';
 }
-// Close menu on link click - only needed for same-page hash links
-document.querySelectorAll('.nav-links a').forEach(function(link){
-  link.addEventListener('click',function(){
-    document.querySelector('.nav-links').classList.remove('open');
-    document.querySelector('.hamburger').classList.remove('open');
-    document.querySelector('.overlay').classList.remove('open');
-  });
-});
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow='';
+}
+
 // Scroll reveal animations
 var observer=new IntersectionObserver(function(entries){
   entries.forEach(function(entry){
