@@ -1023,16 +1023,6 @@ body.dark-mode .carousel-btn{background:var(--gold);color:var(--navy-deep)}
 .section{margin-bottom:3.5rem}
 .layout{padding:2rem 2.5rem 3rem}
 @media(max-width:768px){.layout{padding:1.2rem 1rem 2rem}}
-
-/* === Smoother carousel snapping === */
-.carousel-container .projects-grid,
-.skills-carousel,
-.articles-featured,
-.project-highlights,
-.highlight-strip,
-.lens-grid{
-  scroll-behavior:smooth;
-}
 </style>
 </head>
 <body>
@@ -1139,17 +1129,12 @@ function toggleMenu(){
   document.querySelector('.hamburger').classList.toggle('open');
   document.querySelector('.overlay').classList.toggle('open');
 }
-// Close menu on link click (delayed so navigation fires first)
+// Close menu on link click - only needed for same-page hash links
 document.querySelectorAll('.nav-links a').forEach(function(link){
-  link.addEventListener('click',function(e){
-    var href = this.getAttribute('href');
-    if(href && href !== '#'){
-      e.preventDefault();
-      document.querySelector('.nav-links').classList.remove('open');
-      document.querySelector('.hamburger').classList.remove('open');
-      document.querySelector('.overlay').classList.remove('open');
-      setTimeout(function(){ window.location.href = href; }, 200);
-    }
+  link.addEventListener('click',function(){
+    document.querySelector('.nav-links').classList.remove('open');
+    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.overlay').classList.remove('open');
   });
 });
 // Scroll reveal animations

@@ -1161,16 +1161,6 @@ body.dark-mode .project-highlight h4{color:var(--gold-light)}
   }
 }
 
-
-/* === Smoother carousel snapping === */
-.carousel-container .projects-grid,
-.skills-carousel,
-.articles-featured,
-.project-highlights,
-.highlight-strip,
-.lens-grid{
-  scroll-behavior:smooth;
-}
 </style>
 </head>
 <body>
@@ -1317,17 +1307,12 @@ function toggleMenu(){
   document.querySelector('.hamburger').classList.toggle('open');
   document.querySelector('.overlay').classList.toggle('open');
 }
-// Close menu on link click (delayed so navigation fires first)
+// Close menu on link click - only needed for same-page hash links
 document.querySelectorAll('.nav-links a').forEach(function(link){
-  link.addEventListener('click',function(e){
-    var href = this.getAttribute('href');
-    if(href && href !== '#'){
-      e.preventDefault();
-      document.querySelector('.nav-links').classList.remove('open');
-      document.querySelector('.hamburger').classList.remove('open');
-      document.querySelector('.overlay').classList.remove('open');
-      setTimeout(function(){ window.location.href = href; }, 200);
-    }
+  link.addEventListener('click',function(){
+    document.querySelector('.nav-links').classList.remove('open');
+    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.overlay').classList.remove('open');
   });
 });
 // Scroll reveal animations
@@ -1338,19 +1323,6 @@ var observer=new IntersectionObserver(function(entries){
 },{threshold:0.1});
 document.querySelectorAll('.fade-up').forEach(function(el){observer.observe(el)});
 
-// Touch swipe for scrollable sections
-(function(){
-  var scrollables = document.querySelectorAll('.project-highlights, .highlight-strip, .lens-grid');
-  scrollables.forEach(function(el){
-    var startX=0, scrollLeft=0;
-    el.addEventListener('touchstart',function(e){startX=e.touches[0].pageX;scrollLeft=el.scrollLeft},{passive:true});
-    el.addEventListener('touchmove',function(e){
-      var x=e.touches[0].pageX;
-      var walk=(startX-x)*0.8;
-      el.scrollLeft=scrollLeft+walk;
-    },{passive:true});
-  });
-})();
 </script>
 </body>
 </html>
