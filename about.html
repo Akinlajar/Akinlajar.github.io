@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Writing | Judah Akinlaja</title>
-<meta name="description" content="Essays and analysis on health data, NHS delivery, and the business of healthcare analytics.">
+<title>About | Judah Akinlaja</title>
+<meta name="description" content="Health Data Scientist with a clinical science background and MSc from Manchester. Building analytical solutions for real-world health data challenges.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -830,12 +830,12 @@ footer .accent{
 }
 @media (max-width:768px){
   .layout{padding:1.5rem 1.2rem 3rem}
-  .nav-inner{padding:0 1.2rem;flex-direction:column;gap:0.8rem}
+  .nav-inner{padding:0 1.2rem}
   .nav-links{gap:1rem;flex-wrap:wrap;justify-content:center}
   .nav-links a{font-size:0.75rem}
   .brand{font-size:1.1rem}
-  .brand .role{display:none}
-  .hero-anchors{flex-direction:column}
+  /* role visible on mobile */
+  /* hero-anchors horizontal */
   .anchor-btn{justify-content:center}
   .projects-grid{grid-template-columns:1fr!important}
   .project-card{min-width:0;width:100%;max-width:100%;overflow:hidden}
@@ -965,6 +965,202 @@ body.dark-mode .switch-icon{color:var(--gold)}
 body.dark-mode .theme-switch .icon-sun{display:block}
 body.dark-mode .theme-switch .icon-moon{display:none}
 
+
+/* === Active Nav === */
+.nav-links a.active{color:var(--navy-deep)}
+.nav-links a.active::after{width:100%}
+body.dark-mode .nav-links a.active{color:var(--gold-light)}
+body.dark-mode .nav-links a.active::after{background:var(--gold)}
+
+/* === Hamburger Menu === */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:60}
+.hamburger span{display:block;width:24px;height:2px;background:var(--ink-soft);transition:all 0.3s}
+body.dark-mode .hamburger span{background:var(--gold-light)}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* === Scroll Animations === */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* === Carousel === */
+.carousel-container{position:relative;overflow:hidden}
+.carousel-track{display:flex;transition:transform 0.5s ease;gap:1.5rem}
+.carousel-track>*{flex:0 0 calc(33.333% - 1rem);min-width:280px}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:var(--navy-deep);color:var(--cream);border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;z-index:5;opacity:0.8;transition:opacity 0.3s}
+.carousel-btn:hover{opacity:1}
+.carousel-btn.prev{left:0}
+.carousel-btn.next{right:0}
+body.dark-mode .carousel-btn{background:var(--gold);color:var(--navy-deep)}
+
+@media (max-width:768px){
+  .hamburger{display:flex}
+  .nav-inner{flex-direction:row!important;flex-wrap:nowrap;gap:0}
+  .nav-links{
+    position:fixed;top:0;right:-100%;width:280px;height:100vh;
+    background:var(--paper);flex-direction:column;padding:5rem 2rem 2rem;
+    box-shadow:-4px 0 20px rgba(0,0,0,0.15);transition:right 0.3s ease;
+    gap:1.5rem;z-index:55;align-items:flex-start
+  }
+  .nav-links.open{right:0}
+  .nav-links a{font-size:1rem!important}
+  body.dark-mode .nav-links{background:var(--paper)}
+  .brand{font-size:1.1rem}
+  .brand .role{display:inline!important;font-size:0.6rem}
+  .hero-anchors{flex-direction:row!important;flex-wrap:wrap}
+  .anchor-btn{padding:0.7rem 1rem;font-size:0.75rem}
+  .carousel-track>*{flex:0 0 85%;min-width:0}
+  .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:54}
+  .overlay.open{display:block}
+}
+@media (min-width:769px) and (max-width:1024px){
+  .carousel-track>*{flex:0 0 calc(50% - 0.75rem)}
+}
+
+
+/* === Reduced Spacing === */
+.section{margin-bottom:3.5rem}
+.layout{padding:2rem 2.5rem 3rem}
+@media(max-width:768px){.layout{padding:1.2rem 1rem 2rem}}
+
+/* === About Page Specific === */
+.about-intro{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:2rem;
+  margin-bottom:3rem;
+}
+.about-text{
+  font-size:1.05rem;
+  line-height:1.8;
+  color:var(--text);
+}
+.about-text p{margin-bottom:1.2rem}
+.about-text .lead{
+  font-size:1.15rem;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--navy-deep);
+  line-height:1.6;
+  font-weight:500;
+}
+body.dark-mode .about-text .lead{color:var(--gold-light)}
+.highlight-strip{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1rem;
+  margin:2rem 0;
+}
+.highlight-item{
+  background:var(--cream);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--gold);
+  border-radius:0 4px 4px 0;
+  padding:1.2rem 1.4rem;
+  transition:all 0.3s;
+}
+.highlight-item:hover{transform:translateY(-2px);border-left-color:var(--navy-deep)}
+.highlight-item h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;
+  font-weight:600;
+  color:var(--navy-deep);
+  margin-bottom:0.3rem;
+}
+.highlight-item p{font-size:0.9rem;color:var(--text-dim);line-height:1.6}
+body.dark-mode .highlight-item{background:var(--cream);border-color:var(--rule);border-left-color:var(--gold-dark)}
+body.dark-mode .highlight-item:hover{border-left-color:var(--gold)}
+body.dark-mode .highlight-item h4{color:var(--gold-light)}
+.project-highlights{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.2rem;
+  margin-top:1.5rem;
+}
+.project-highlight{
+  background:var(--cream);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:1.5rem;
+  transition:all 0.3s;
+}
+.project-highlight:hover{
+  border-color:var(--gold);
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(15,30,56,0.08);
+}
+.project-highlight .ph-label{
+  font-family:'Inter',sans-serif;
+  font-size:0.68rem;
+  color:var(--gold-dark);
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  margin-bottom:0.5rem;
+  font-weight:600;
+}
+.project-highlight h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;
+  font-weight:600;
+  color:var(--navy-deep);
+  margin-bottom:0.5rem;
+  line-height:1.25;
+}
+.project-highlight p{font-size:0.92rem;color:var(--text);line-height:1.7}
+body.dark-mode .project-highlight{background:var(--cream);border-color:var(--rule)}
+body.dark-mode .project-highlight:hover{border-color:var(--gold-dark)}
+body.dark-mode .project-highlight h4{color:var(--gold-light)}
+
+
+/* === About page project highlights carousel on mobile === */
+@media(max-width:768px){
+  .project-highlights{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:1rem;
+    padding:0.5rem 0;
+  }
+  .project-highlights::-webkit-scrollbar{display:none}
+  .project-highlight{
+    flex:0 0 85%;
+    min-width:0;
+    scroll-snap-align:start;
+  }
+  .highlight-strip{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:1rem;
+    padding:0.5rem 0;
+  }
+  .highlight-strip::-webkit-scrollbar{display:none}
+  .highlight-item{
+    flex:0 0 75%;
+    min-width:0;
+    scroll-snap-align:start;
+  }
+  .lens-grid{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:1rem;
+    padding:0.5rem 0;
+  }
+  .lens-grid::-webkit-scrollbar{display:none}
+  .lens-card{
+    flex:0 0 85%;
+    min-width:0;
+    scroll-snap-align:start;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -973,12 +1169,16 @@ body.dark-mode .theme-switch .icon-moon{display:none}
     <a href="index.html" class="brand">Judah Akinlaja <span class="divider">/</span> <span class="role">Health Data Scientist</span></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="qualifications.html">Qualifications</a></li>
+      <li><a href="qualifications.html" >Qualifications</a></li>
       <li><a href="experience.html">Experience</a></li>
-      <li><a href="writing.html" style="color:var(--navy-deep)">Writing</a></li>
+      <li><a href="publications.html">Publications</a></li>
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
       <div class="theme-switch" onclick="toggleTheme()" role="button" aria-label="Toggle dark mode" tabindex="0">
         <svg class="switch-icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         <div class="switch-track"></div>
@@ -986,62 +1186,105 @@ body.dark-mode .theme-switch .icon-moon{display:none}
       </div>
   </div>
 </nav>
+<div class="overlay" onclick="toggleMenu()"></div>
 
 <div class="layout">
   <main class="main">
-    <section class="section" id="writing">
+    <section class="section fade-up" id="about">
       <div class="section-header">
-        <h2 class="section-title">Latest <span class="divider">|</span> <span class="italic">Writing</span></h2>
+        <h2 class="section-title">About <span class="divider">|</span> <span class="italic">Me</span></h2>
       </div>
-      <span class="section-subtitle">Notes &amp; Analysis</span>
-      <p class="section-intro">Essays on health data, NHS delivery, and the business side of healthcare analytics. Writing publicly sharpens my thinking and shows how I approach problems.</p>
+      <span class="section-subtitle">Background & Mission</span>
 
-      <div class="articles-featured">
+      <div class="about-intro">
+        <div class="about-text">
+          <p class="lead">I'm Judah Akinlaja, a health data scientist working at the intersection of clinical knowledge and applied analytics. My work is about one thing: turning health data into decisions that actually improve how care is delivered.</p>
+          
+          <p>My path into data science started in clinical science. I studied Basic Medical and Clinical Sciences at the University of Ilorin, Nigeria, where I built a deep understanding of human physiology, disease pathways, and the scientific method. That foundation matters. It means I don't just run models on health data, I understand what the variables represent, why certain patterns emerge, and what clinicians need from the numbers.</p>
+          
+          <p>I then moved to the University of Manchester for an MSc in Health Data Science, where I trained in machine learning, statistical modelling, medical image analysis, and clinical bioinformatics. Manchester gave me the technical toolkit. Nigeria gave me the clinical instinct. The combination is what shapes how I approach every project.</p>
+          
+          <p>What drives me is a specific frustration: the gap between what health data could do and what it actually does. Hospitals sit on years of operational data that never gets analysed. Clinical teams make decisions based on intuition when the evidence is right there in the system. I build the analytical bridges that close that gap, not with flashy AI, but with rigorous, interpretable solutions that people actually trust and use.</p>
+        </div>
+      </div>
 
-        <a href="posts/architecture-of-care.html" class="article-card">
-          <div class="article-meta">
-            <span class="article-category">Industry Analysis</span>
-            <span class="article-date">29 April 2026</span>
-            <span class="article-status">Published</span>
-          </div>
-          <h3 class="article-title">The Architecture of Care: Decoding Health Data Quality in the UK vs. the US</h3>
-          <p class="article-excerpt">Two nations, two philosophies. The UK built a unified data goldmine through the NHS; the US created a fragmented marketplace where health data is commoditised. A comparative analysis of interoperability, governance, and what it means for anyone building in the health data sector.</p>
-          <span class="article-readmore">Read More &rarr;</span>
-        </a>
+      <div class="highlight-strip">
+        <div class="highlight-item">
+          <h4>Clinical Foundations</h4>
+          <p>BSc in Basic Medical/Clinical Sciences, understanding the biology behind the data</p>
+        </div>
+        <div class="highlight-item">
+          <h4>Technical Training</h4>
+          <p>MSc Health Data Science, Manchester: ML, deep learning, medical imaging, bioinformatics</p>
+        </div>
+        <div class="highlight-item">
+          <h4>Applied Focus</h4>
+          <p>Building for adoption: models clinicians trust, dashboards managers actually open</p>
+        </div>
+        <div class="highlight-item">
+          <h4>Next Chapter</h4>
+          <p>Joining NHS England's Early Talent programme in applied health analytics</p>
+        </div>
+      </div>
+    </section>
 
-        <a href="posts/automation-imperative.html" class="article-card">
-          <div class="article-meta">
-            <span class="article-category">Essay</span>
-            <span class="article-date">22 April 2026</span>
-            <span class="article-status">Published</span>
-          </div>
-          <h3 class="article-title">The Automation Imperative: Why "Do Once and Automate" Is a Survival Strategy</h3>
-          <p class="article-excerpt">Inside the philosophy that separates health data teams who scale from those who drown in spreadsheets. Why your first contribution to an NHS Trust will be a script that saves four hours a week, not a deep learning model.</p>
-          <span class="article-readmore">Read More &rarr;</span>
-        </a>
+    <section class="section fade-up">
+      <div class="section-header">
+        <h2 class="section-title">What I've <span class="divider">|</span> <span class="italic">Built</span></h2>
+      </div>
+      <span class="section-subtitle">Selected Project Work</span>
 
-        <a href="posts/uk-health-data-business.html" class="article-card">
-          <div class="article-meta">
-            <span class="article-category">Industry Analysis</span>
-            <span class="article-date">15 April 2026</span>
-            <span class="article-status">Published</span>
-          </div>
-          <h3 class="article-title">The UK Health Data Business</h3>
-          <p class="article-excerpt">Who owns the pipes, who moves the money, and why health data scientists should understand the business they work in. A breakdown of the £15 billion UK digital health market: the five layers of players, the contracts that shape careers, and what most MSc programmes never cover.</p>
-          <span class="article-readmore">Read More &rarr;</span>
-        </a>
+      <div class="about-text" style="margin-bottom:1.5rem">
+        <p>Every project I take on starts with a real problem, not a Kaggle dataset or a tutorial exercise. These are the health data bottlenecks I've chosen to tackle, each one grounded in a system that affects real patients and real budgets.</p>
+      </div>
 
-        <a href="posts/nhs-dna-start-date.html" class="article-card">
-          <div class="article-meta">
-            <span class="article-category">Essay</span>
-            <span class="article-date">1 April 2026</span>
-            <span class="article-status">Published</span>
-          </div>
-          <h3 class="article-title">The Day I Got My Start Date</h3>
-          <p class="article-excerpt">What building a £1.2 billion NHS problem into a portfolio project actually taught me. The DNA prediction project that led to my NHS England role, the 93% accuracy result that turned out to be data leakage, and why catching that mattered more than any clean number ever would have.</p>
-          <span class="article-readmore">Read More &rarr;</span>
-        </a>
+      <div class="project-highlights">
+        <div class="project-highlight">
+          <div class="ph-label">NHS Operations</div>
+          <h4>DNA Prediction Engine</h4>
+          <p>Predicting missed NHS appointments, a problem costing the health system an estimated &pound;1.2 billion annually. Built a classification model that identifies high-risk no-shows before they happen, enabling targeted intervention.</p>
+        </div>
+        <div class="project-highlight">
+          <div class="ph-label">Clinical AI</div>
+          <h4>Cancer Pathology Automation</h4>
+          <p>Automated detection of cancerous tissue in histopathology slides using deep learning. Designed to support pathologists with early screening, not replace clinical judgement.</p>
+        </div>
+        <div class="project-highlight">
+          <div class="ph-label">Public Health</div>
+          <h4>Disease Surveillance Dashboard</h4>
+          <p>Real-time epidemiological tracking across population-level datasets. Built to give public health teams faster access to outbreak patterns and intervention metrics.</p>
+        </div>
+        <div class="project-highlight">
+          <div class="ph-label">Health Economics</div>
+          <h4>Resource Allocation Models</h4>
+          <p>Analytical frameworks for NHS commissioning decisions, helping trusts understand where money should go based on demand forecasting and outcome data.</p>
+        </div>
+      </div>
+    </section>
 
+    <section class="section fade-up">
+      <div class="section-header">
+        <h2 class="section-title">How I <span class="divider">|</span> <span class="italic">Think</span></h2>
+      </div>
+      <span class="section-subtitle">Philosophy of Work</span>
+
+      <div class="lens-grid">
+        <div class="lens-card">
+          <h3>Start with the decision, not the dataset</h3>
+          <p>The first question is never "what does the data say?" It's "what decision needs to be made, and what would change someone's mind?" Every project I take on begins with the stakeholder's problem. The model is just the vehicle.</p>
+        </div>
+        <div class="lens-card">
+          <h3>A model nobody trusts is a model nobody uses</h3>
+          <p>Interpretability is not optional. It's the difference between a dashboard that gathers dust and an insight that changes how a ward operates. I build for adoption, not accuracy leaderboards. If the clinical team can't explain why the model flagged a patient, the work isn't finished.</p>
+        </div>
+        <div class="lens-card">
+          <h3>Understand the money, not just the maths</h3>
+          <p>Who commissions the work, who funds the intervention, and who carries the risk if it fails. These questions shape every recommendation. Ignoring procurement, budgets, and political context produces technically correct analysis that never reaches a decision.</p>
+        </div>
+        <div class="lens-card">
+          <h3>Build for systems that don't exist yet</h3>
+          <p>The long game: bringing rigorous health data science to markets where the infrastructure is still being built. Nigeria and West Africa first. Not charity, not parachute work. Sustainable, locally-owned analytical capacity that compounds over decades.</p>
+        </div>
       </div>
     </section>
   </main>
@@ -1057,6 +1300,41 @@ function toggleTheme(){
   try {
     if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
   } catch(e) {}
+})();
+
+function toggleMenu(){
+  document.querySelector('.nav-links').classList.toggle('open');
+  document.querySelector('.hamburger').classList.toggle('open');
+  document.querySelector('.overlay').classList.toggle('open');
+}
+// Close menu on link click
+document.querySelectorAll('.nav-links a').forEach(function(link){
+  link.addEventListener('click',function(){
+    document.querySelector('.nav-links').classList.remove('open');
+    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.overlay').classList.remove('open');
+  });
+});
+// Scroll reveal animations
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}
+  });
+},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(function(el){observer.observe(el)});
+
+// Touch swipe for scrollable sections
+(function(){
+  var scrollables = document.querySelectorAll('.project-highlights, .highlight-strip, .lens-grid');
+  scrollables.forEach(function(el){
+    var startX=0, scrollLeft=0;
+    el.addEventListener('touchstart',function(e){startX=e.touches[0].pageX;scrollLeft=el.scrollLeft},{passive:true});
+    el.addEventListener('touchmove',function(e){
+      var x=e.touches[0].pageX;
+      var walk=(startX-x)*1.5;
+      el.scrollLeft=scrollLeft+walk;
+    },{passive:true});
+  });
 })();
 </script>
 </body>
