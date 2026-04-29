@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Automation Imperative | Judah Akinlaja</title>
+<meta name="description" content="Why 'Do Once and Automate' is not just an NHS slogan but a survival strategy for health data teams drowning in manual processes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-deep:#0f1e38;
+  --navy:#152847;
+  --navy-light:#1e3557;
+  --cream:#f5efe0;
+  --cream-warm:#ebe3d0;
+  --paper:#faf6ec;
+  --gold:#c8a964;
+  --gold-light:#d9bd7e;
+  --gold-dark:#9d7f3e;
+  --ink:#1a1814;
+  --ink-soft:#3a3528;
+  --text:#3d3830;
+  --text-dim:#6b6459;
+  --rule:#d4ccbd;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,sans-serif;
+  background:var(--paper);
+  color:var(--text);
+  line-height:1.75;
+  font-size:18px;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:0.025;
+  z-index:100;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Top Nav */
+nav{
+  position:relative;
+  background:var(--paper);
+  border-bottom:1px solid var(--rule);
+  z-index:50;
+  padding:1.1rem 0;
+}
+.nav-inner{
+  max-width:1500px;
+  margin:0 auto;
+  padding:0 2.5rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.brand{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;
+  font-size:1.35rem;
+  letter-spacing:0.01em;
+  color:var(--navy-deep);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:0.7rem;
+}
+.brand .divider{color:var(--gold);font-weight:400}
+.brand .role{
+  color:var(--gold-dark);
+  font-size:0.72rem;
+  letter-spacing:0.15em;
+  font-weight:600;
+  font-family:'Inter',sans-serif;
+  text-transform:uppercase;
+}
+.nav-links{display:flex;gap:2.2rem;list-style:none;align-items:center}
+.nav-links a{
+  font-family:'Inter',sans-serif;
+  color:var(--ink-soft);
+  text-decoration:none;
+  font-size:0.88rem;
+  font-weight:500;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  position:relative;
+  transition:color 0.25s;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  bottom:-6px;
+  left:0;
+  width:0;
+  height:2px;
+  background:var(--gold);
+  transition:width 0.3s;
+}
+.nav-links a:hover{color:var(--navy-deep)}
+.nav-links a:hover::after{width:100%}
+
+/* Back link */
+.back-link{
+  max-width:740px;
+  margin:3rem auto 1.5rem;
+  padding:0 2rem;
+}
+.back-link a{
+  font-family:'Inter',sans-serif;
+  font-size:0.82rem;
+  color:var(--gold-dark);
+  text-decoration:none;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  transition:color 0.25s;
+}
+.back-link a:hover{color:var(--navy-deep)}
+
+/* Article header */
+.article-header{
+  max-width:740px;
+  margin:0 auto 3rem;
+  padding:0 2rem;
+}
+.article-category-row{
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  margin-bottom:1.5rem;
+  font-family:'Inter',sans-serif;
+  font-size:0.72rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.article-category-row .cat{color:var(--gold-dark)}
+.article-category-row .sep{color:var(--rule)}
+.article-category-row .date{color:var(--text-dim)}
+.article-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,5vw,3.6rem);
+  font-weight:500;
+  line-height:1.1;
+  letter-spacing:-0.015em;
+  color:var(--navy-deep);
+  margin-bottom:1.5rem;
+}
+.article-subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(1.2rem,2.2vw,1.5rem);
+  font-weight:400;
+  color:var(--gold-dark);
+  line-height:1.45;
+  margin-bottom:2rem;
+}
+.article-byline{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding-top:1.5rem;
+  border-top:1px solid var(--rule);
+}
+.byline-photo{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  overflow:hidden;
+  padding:2px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  flex-shrink:0;
+}
+.byline-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 20%;
+  border-radius:50%;
+  display:block;
+}
+.byline-text{display:flex;flex-direction:column;gap:0.2rem}
+.byline-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;
+  font-weight:600;
+  color:var(--navy-deep);
+}
+.byline-meta{
+  font-family:'Inter',sans-serif;
+  font-size:0.8rem;
+  color:var(--text-dim);
+}
+
+/* Article body */
+.article-body{
+  max-width:680px;
+  margin:0 auto;
+  padding:0 2rem 5rem;
+  font-family:'Inter',sans-serif;
+  font-size:18px;
+  line-height:1.8;
+  color:var(--text);
+}
+.article-body > p:first-of-type::first-letter{
+  font-family:'Cormorant Garamond',serif;
+  font-size:4.5rem;
+  float:left;
+  line-height:0.85;
+  padding:0.35rem 0.7rem 0 0;
+  color:var(--gold-dark);
+  font-weight:500;
+}
+.article-body p{margin-bottom:1.5rem}
+.article-body h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.9rem;
+  font-weight:600;
+  color:var(--navy-deep);
+  line-height:1.25;
+  letter-spacing:-0.01em;
+  margin:3rem 0 1rem;
+  position:relative;
+  padding-top:1.5rem;
+}
+.article-body h2::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:40px;
+  height:2px;
+  background:var(--gold);
+}
+.article-body h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;
+  font-weight:600;
+  color:var(--navy-deep);
+  margin:2rem 0 0.8rem;
+  letter-spacing:-0.005em;
+}
+.article-body strong{
+  color:var(--navy-deep);
+  font-weight:600;
+}
+.article-body em{font-style:italic}
+.article-body a{
+  color:var(--gold-dark);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+.article-body a:hover{color:var(--navy-deep)}
+
+/* Pull quote */
+.pull-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1.5rem;
+  line-height:1.45;
+  color:var(--navy-deep);
+  border-left:3px solid var(--gold);
+  padding:0.5rem 0 0.5rem 1.5rem;
+  margin:2.5rem 0;
+  font-weight:500;
+}
+
+/* Stat highlight */
+.stat-row{
+  display:flex;
+  gap:2rem;
+  padding:1.5rem 0;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  margin:2rem 0;
+  font-family:'Cormorant Garamond',serif;
+}
+.stat-item{flex:1;text-align:center}
+.stat-num{
+  font-size:2rem;
+  font-weight:600;
+  color:var(--navy-deep);
+  display:block;
+  line-height:1.1;
+  margin-bottom:0.3rem;
+}
+.stat-label{
+  font-family:'Inter',sans-serif;
+  font-size:0.78rem;
+  color:var(--text-dim);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  font-weight:500;
+}
+
+/* End divider */
+.article-end{
+  text-align:center;
+  margin:3rem 0 2rem;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--gold);
+  font-size:1.5rem;
+  letter-spacing:0.4em;
+}
+
+/* Author footer */
+.author-footer{
+  max-width:680px;
+  margin:0 auto;
+  padding:2rem;
+  background:var(--cream);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--gold);
+  border-radius:0 4px 4px 0;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1rem;
+  line-height:1.65;
+  color:var(--text);
+}
+.author-footer a{
+  color:var(--gold-dark);
+  text-decoration:underline;
+  font-style:normal;
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:0.9rem;
+}
+
+/* Continue reading */
+.continue-reading{
+  max-width:740px;
+  margin:4rem auto 0;
+  padding:3rem 2rem;
+  border-top:1px solid var(--rule);
+  text-align:center;
+}
+.continue-reading .label{
+  font-family:'Inter',sans-serif;
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  color:var(--text-dim);
+  text-transform:uppercase;
+  font-weight:600;
+  margin-bottom:1.5rem;
+}
+.continue-reading a.home-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.6rem;
+  padding:0.9rem 1.8rem;
+  background:var(--navy-deep);
+  color:var(--cream);
+  text-decoration:none;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:0.85rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  border-radius:3px;
+  transition:all 0.25s;
+}
+.continue-reading a.home-btn:hover{
+  background:var(--gold-dark);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(15,30,56,0.2);
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  padding:2.5rem 2rem;
+  border-top:1px solid var(--rule);
+  font-family:'Inter',sans-serif;
+  font-size:0.78rem;
+  color:var(--text-dim);
+  letter-spacing:0.06em;
+}
+footer .accent{
+  color:var(--gold-dark);
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.95rem;
+  font-weight:500;
+}
+
+/* Responsive */
+@media (max-width:768px){
+  body{font-size:17px}
+  .nav-inner{padding:0 1.2rem;flex-direction:column;gap:0.8rem}
+  .nav-links{gap:1rem;flex-wrap:wrap;justify-content:center}
+  .nav-links a{font-size:0.75rem}
+  .brand{font-size:1.1rem}
+  .brand .role{display:none}
+  .article-body{font-size:17px;padding:0 1.3rem 4rem}
+  .article-header,.back-link{padding:0 1.3rem}
+  .stat-row{flex-direction:column;gap:1.5rem;padding:1.5rem}
+  .pull-quote{font-size:1.25rem;padding-left:1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="brand">Judah Akinlaja <span class="divider">/</span> <span class="role">Health Data Scientist</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../portfolio.html">Portfolio</a></li>
+      <li><a href="../qualifications.html">Qualifications</a></li>
+      <li><a href="../experience.html">Experience</a></li>
+      <li><a href="../writing.html">Writing</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="back-link">
+  <a href="../writing.html">&#8592; Back to Writing</a>
+</div>
+
+<header class="article-header">
+  <div class="article-category-row">
+    <span class="cat">Essay</span>
+    <span class="sep">&middot;</span>
+    <span class="date">22 April 2026</span>
+    <span class="sep">&middot;</span>
+    <span class="date">8 min read</span>
+  </div>
+  <h1 class="article-h1">The Automation Imperative: Why "Do Once and Automate" Is a Survival Strategy</h1>
+  <p class="article-subtitle">Inside the philosophy that separates health data teams who scale from those who drown in spreadsheets. And what it means for your first role in the sector.</p>
+  <div class="article-byline">
+    <div class="byline-photo"><img src="../assets/judah.jpg" alt="Judah Akinlaja"></div>
+    <div class="byline-text">
+      <span class="byline-name">Judah Akinlaja</span>
+      <span class="byline-meta">Health Data Scientist &middot; 8 min read</span>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+
+<p>There is a phrase that surfaces constantly in NHS digital strategy documents, procurement frameworks, and operational planning meetings: "Do Once and Automate." On the surface, it reads like a productivity tip you might find in a LinkedIn carousel. But in practice, it represents one of the most important philosophical shifts in modern health data work, and one that most new entrants to the field completely underestimate.</p>
+
+<p>The principle is straightforward. If a process needs to happen more than once, build it so it runs without human intervention the second time. Stop copying data between spreadsheets. Stop manually formatting the same weekly report. Stop running the same SQL query by hand every Monday morning. Instead, invest the upfront time to script it, pipeline it, and schedule it. Then move on to the next problem.</p>
+
+<h2>Why Healthcare Is Different</h2>
+
+<p>Every industry talks about automation. Finance has algorithmic trading. Logistics has supply chain optimisation. But healthcare carries a unique burden that makes automation both more difficult and more urgent.</p>
+
+<p>The NHS processes over 1.2 million patients every 36 hours. That volume generates an extraordinary amount of operational data: appointment records, referral pathways, diagnostic results, prescribing logs, discharge summaries, and coding classifications. Behind each of those data points sits a clinical decision that affects a real person. When that data is handled manually, errors compound. A miskeyed ICD-10 code cascades through reimbursement, research datasets, and population health models. A delayed discharge report blocks a bed that someone in A&amp;E is waiting for.</p>
+
+<div class="stat-row">
+  <div class="stat-item"><span class="stat-num">1.2M</span><span class="stat-label">Patients per 36 hrs</span></div>
+  <div class="stat-item"><span class="stat-num">13.5%</span><span class="stat-label">Admin time on manual data</span></div>
+  <div class="stat-item"><span class="stat-num">£2.3B</span><span class="stat-label">Annual cost of NHS DNAs</span></div>
+</div>
+
+<p>The scale of the problem is what makes the "Do Once and Automate" philosophy essential rather than optional. Manual processes in healthcare do not just waste time. They introduce clinical risk. Every hand-touched data point is a potential failure point, and in a system running at full capacity, those failures stack up faster than anyone can catch them.</p>
+
+<h2>What Automation Actually Looks Like in Practice</h2>
+
+<p>When most people hear "automation" in a health data context, they imagine complex machine learning pipelines or AI-driven diagnostic tools. The reality is far more mundane, and far more valuable.</p>
+
+<h3>Reporting Pipelines</h3>
+
+<p>Consider a typical NHS Trust that produces a weekly performance dashboard for its board. Without automation, an analyst downloads data from multiple systems, cleans it in Excel, formats it into a PowerPoint template, and emails it to fifteen stakeholders. This process takes between four and eight hours every week. Multiply that across 220 NHS Trusts and you begin to see the structural waste.</p>
+
+<p>An automated version of this pipeline pulls data directly from source systems through scheduled SQL queries, applies transformation logic in Python or R, renders the output into a standardised template, and distributes it automatically. The analyst's role shifts from data handler to data interpreter: reviewing outputs for anomalies, investigating unexpected trends, and advising on action. That is where the real value of a health data professional lies.</p>
+
+<h3>Data Quality Monitoring</h3>
+
+<p>Another critical application is automated data quality checking. In any large health dataset, you will find missing values, duplicate records, impossible dates, and coding inconsistencies. Rather than discovering these issues weeks later during an audit, automated validation scripts catch them at the point of entry. A well-designed pipeline flags that a patient's discharge date precedes their admission date before that record propagates downstream. It alerts when a GP practice suddenly stops submitting data, suggesting a system integration failure rather than a genuine drop in activity.</p>
+
+<h3>Reproducible Research</h3>
+
+<p>For health data scientists working in research, automation means reproducibility. A study that relies on manual data extraction and ad hoc analysis in Jupyter notebooks is difficult to replicate, difficult to audit, and difficult to defend. Wrapping that analysis in a version-controlled pipeline with documented dependencies, parameterised inputs, and automated outputs transforms it from a one-off exercise into a reusable asset. The next researcher who needs to update the analysis with a new year of data can do so in minutes rather than weeks.</p>
+
+<div class="pull-quote">The goal is not to remove humans from the process. It is to remove the parts of the process that do not require human judgement, so that humans can focus on the parts that do.</div>
+
+<h2>The Cultural Barrier</h2>
+
+<p>If automation is so obviously beneficial, why does so much health data work remain manual? The answer is cultural more than technical.</p>
+
+<p>Many NHS organisations have built their operational processes around individuals rather than systems. There is often one person who "knows how to run the cancer waiting times report" or who "always does the monthly submissions." When that person goes on leave or changes roles, the process breaks. This is not a technology problem. It is an institutional knowledge problem, and automation is the solution because it forces teams to codify their knowledge into scripts and pipelines rather than storing it in someone's head.</p>
+
+<p>There is also a trust gap. Clinical and operational staff who have spent years building their own spreadsheets and manual workflows are understandably cautious about handing control to an automated system they cannot see inside. Overcoming this requires transparency: showing the logic, validating the outputs against known baselines, and building in human checkpoints at critical decision points.</p>
+
+<h2>What This Means for Early-Career Data Scientists</h2>
+
+<p>If you are entering the health data sector now, understanding automation is not a nice-to-have. It is the skill that will separate you from every other candidate with a Python certificate and a Kaggle profile.</p>
+
+<p>The ability to take a messy, manual process and turn it into a clean, automated pipeline is worth more to an NHS Trust than any number of sophisticated models. Your first contribution will almost never be a deep learning algorithm. It will be a script that saves a team four hours a week. And that script, unglamorous as it sounds, will build more trust, more credibility, and more institutional goodwill than any poster presentation at a conference.</p>
+
+<p>This is the part of health data science that MSc programmes rarely teach. They teach you how to build models. They do not teach you how to deploy those models into a live system where the data arrives late, the formats change without warning, and the end user needs results by 8am on Monday. Automation thinking bridges that gap. It forces you to consider not just whether your analysis works, but whether it works reliably, repeatedly, and without your presence.</p>
+
+<h2>The Bigger Picture</h2>
+
+<p>The NHS Long Term Plan, the Goldacre Review, and the Federated Data Platform all point in the same direction: health data infrastructure that is automated, standardised, and scalable. The organisations that are leading this shift are not the ones with the biggest budgets or the flashiest technology. They are the ones that took the time to automate their foundations before building on top of them.</p>
+
+<p>For health data professionals, this is the imperative. Not automation for its own sake, but automation as the prerequisite for everything else: better patient outcomes, faster operational decisions, and research that can actually be reproduced and trusted. Do it once. Automate it. Then move on to the problem that actually needs your brain.</p>
+
+<div class="article-end">&middot; &middot; &middot;</div>
+</article>
+
+<div class="author-footer">
+  Judah Akinlaja is a Health Data Scientist and MSc Health Data Science candidate at the University of Manchester, with experience at NHS England and Lagos University Teaching Hospital. He writes about health data systems, clinical analytics, and the business of healthcare. <a href="../index.html#contact">Get in touch &rarr;</a>
+</div>
+
+<div class="continue-reading">
+  <div class="label">Continue Reading</div>
+  <a href="../writing.html" class="home-btn">&#8592; All Writing</a>
+</div>
+
+<footer>&copy; 2026 <span class="accent">Judah Akinlaja</span> &middot; Health Data Scientist &middot; Manchester, UK</footer>
+
+</body>
+</html>

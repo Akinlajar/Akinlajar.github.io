@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Day I Got My Start Date — Judah Akinlaja</title>
+<meta name="description" content="What building a £1.2 billion NHS problem into a portfolio project actually taught me about data science, honest analysis, and doing the work before the role arrives.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-deep:#0f1e38;
+  --navy:#152847;
+  --navy-light:#1e3557;
+  --cream:#f5efe0;
+  --cream-warm:#ebe3d0;
+  --paper:#faf6ec;
+  --gold:#c8a964;
+  --gold-light:#d9bd7e;
+  --gold-dark:#9d7f3e;
+  --ink:#1a1814;
+  --ink-soft:#3a3528;
+  --text:#3d3830;
+  --text-dim:#6b6459;
+  --rule:#d4ccbd;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,sans-serif;
+  background:var(--paper);
+  color:var(--text);
+  line-height:1.75;
+  font-size:18px;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:0.025;
+  z-index:100;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Top Nav */
+nav{
+  position:relative;
+  background:var(--paper);
+  border-bottom:1px solid var(--rule);
+  z-index:50;
+  padding:1.1rem 0;
+}
+.nav-inner{
+  max-width:1500px;
+  margin:0 auto;
+  padding:0 2.5rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.brand{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;
+  font-size:1.35rem;
+  letter-spacing:0.01em;
+  color:var(--navy-deep);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:0.7rem;
+}
+.brand .divider{color:var(--gold);font-weight:400}
+.brand .role{
+  color:var(--gold-dark);
+  font-size:0.72rem;
+  letter-spacing:0.15em;
+  font-weight:600;
+  font-family:'Inter',sans-serif;
+  text-transform:uppercase;
+}
+.nav-links{display:flex;gap:2.2rem;list-style:none;align-items:center}
+.nav-links a{
+  font-family:'Inter',sans-serif;
+  color:var(--ink-soft);
+  text-decoration:none;
+  font-size:0.88rem;
+  font-weight:500;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  position:relative;
+  transition:color 0.25s;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  bottom:-6px;
+  left:0;
+  width:0;
+  height:2px;
+  background:var(--gold);
+  transition:width 0.3s;
+}
+.nav-links a:hover{color:var(--navy-deep)}
+.nav-links a:hover::after{width:100%}
+
+/* Back link */
+.back-link{
+  max-width:740px;
+  margin:3rem auto 1.5rem;
+  padding:0 2rem;
+}
+.back-link a{
+  font-family:'Inter',sans-serif;
+  font-size:0.82rem;
+  color:var(--gold-dark);
+  text-decoration:none;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  transition:color 0.25s;
+}
+.back-link a:hover{color:var(--navy-deep)}
+
+/* Article header */
+.article-header{
+  max-width:740px;
+  margin:0 auto 3rem;
+  padding:0 2rem;
+}
+.article-category-row{
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  margin-bottom:1.5rem;
+  font-family:'Inter',sans-serif;
+  font-size:0.72rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.article-category-row .cat{color:var(--gold-dark)}
+.article-category-row .sep{color:var(--rule)}
+.article-category-row .date{color:var(--text-dim)}
+.article-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,5vw,3.6rem);
+  font-weight:500;
+  line-height:1.1;
+  letter-spacing:-0.015em;
+  color:var(--navy-deep);
+  margin-bottom:1.5rem;
+}
+.article-subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(1.2rem,2.2vw,1.5rem);
+  font-weight:400;
+  color:var(--gold-dark);
+  line-height:1.45;
+  margin-bottom:2rem;
+}
+.article-byline{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  padding-top:1.5rem;
+  border-top:1px solid var(--rule);
+}
+.byline-photo{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  overflow:hidden;
+  padding:2px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  flex-shrink:0;
+}
+.byline-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 20%;
+  border-radius:50%;
+  display:block;
+}
+.byline-text{display:flex;flex-direction:column;gap:0.2rem}
+.byline-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;
+  font-weight:600;
+  color:var(--navy-deep);
+}
+.byline-meta{
+  font-family:'Inter',sans-serif;
+  font-size:0.8rem;
+  color:var(--text-dim);
+}
+
+/* Article body */
+.article-body{
+  max-width:680px;
+  margin:0 auto;
+  padding:0 2rem 5rem;
+  font-family:'Inter',sans-serif;
+  font-size:18px;
+  line-height:1.8;
+  color:var(--text);
+}
+.article-body > p:first-of-type::first-letter{
+  font-family:'Cormorant Garamond',serif;
+  font-size:4.5rem;
+  float:left;
+  line-height:0.85;
+  padding:0.35rem 0.7rem 0 0;
+  color:var(--gold-dark);
+  font-weight:500;
+}
+.article-body p{margin-bottom:1.5rem}
+.article-body h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.9rem;
+  font-weight:600;
+  color:var(--navy-deep);
+  line-height:1.25;
+  letter-spacing:-0.01em;
+  margin:3rem 0 1rem;
+  position:relative;
+  padding-top:1.5rem;
+}
+.article-body h2::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  width:40px;
+  height:2px;
+  background:var(--gold);
+}
+.article-body h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;
+  font-weight:600;
+  color:var(--navy-deep);
+  margin:2rem 0 0.8rem;
+  letter-spacing:-0.005em;
+}
+.article-body strong{
+  color:var(--navy-deep);
+  font-weight:600;
+}
+.article-body em{font-style:italic}
+.article-body a{
+  color:var(--gold-dark);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+.article-body a:hover{color:var(--navy-deep)}
+
+/* Pull quote / emphasis block */
+.pull-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1.5rem;
+  line-height:1.45;
+  color:var(--navy-deep);
+  border-left:3px solid var(--gold);
+  padding:0.5rem 0 0.5rem 1.5rem;
+  margin:2.5rem 0;
+  font-weight:500;
+}
+
+/* Stat highlight */
+.stat-row{
+  display:flex;
+  gap:2rem;
+  padding:1.5rem 0;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  margin:2rem 0;
+  font-family:'Cormorant Garamond',serif;
+}
+.stat-item{flex:1;text-align:center}
+.stat-num{
+  font-size:2rem;
+  font-weight:600;
+  color:var(--navy-deep);
+  display:block;
+  line-height:1.1;
+  margin-bottom:0.3rem;
+}
+.stat-label{
+  font-family:'Inter',sans-serif;
+  font-size:0.78rem;
+  color:var(--text-dim);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  font-weight:500;
+}
+
+/* End divider */
+.article-end{
+  text-align:center;
+  margin:3rem 0 2rem;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--gold);
+  font-size:1.5rem;
+  letter-spacing:0.4em;
+}
+
+/* Author footer */
+.author-footer{
+  max-width:680px;
+  margin:0 auto;
+  padding:2rem;
+  background:var(--cream);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--gold);
+  border-radius:0 4px 4px 0;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1rem;
+  line-height:1.65;
+  color:var(--text);
+}
+.author-footer a{
+  color:var(--gold-dark);
+  text-decoration:underline;
+  font-style:normal;
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  font-size:0.9rem;
+}
+
+/* Related / Continue reading */
+.continue-reading{
+  max-width:740px;
+  margin:4rem auto 0;
+  padding:3rem 2rem;
+  border-top:1px solid var(--rule);
+  text-align:center;
+}
+.continue-reading .label{
+  font-family:'Inter',sans-serif;
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  color:var(--text-dim);
+  text-transform:uppercase;
+  font-weight:600;
+  margin-bottom:1.5rem;
+}
+.continue-reading a.home-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0.6rem;
+  padding:0.9rem 1.8rem;
+  background:var(--navy-deep);
+  color:var(--cream);
+  text-decoration:none;
+  font-family:'Inter',sans-serif;
+  font-weight:500;
+  font-size:0.85rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  border-radius:3px;
+  transition:all 0.25s;
+}
+.continue-reading a.home-btn:hover{
+  background:var(--gold-dark);
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(15,30,56,0.2);
+}
+
+/* Footer */
+footer{
+  text-align:center;
+  padding:2.5rem 2rem;
+  border-top:1px solid var(--rule);
+  font-family:'Inter',sans-serif;
+  font-size:0.78rem;
+  color:var(--text-dim);
+  letter-spacing:0.06em;
+}
+footer .accent{
+  color:var(--gold-dark);
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.95rem;
+  font-weight:500;
+}
+
+/* Responsive */
+@media (max-width:768px){
+  body{font-size:17px}
+  .nav-inner{padding:0 1.2rem;flex-direction:column;gap:0.8rem}
+  .nav-links{gap:1rem;flex-wrap:wrap;justify-content:center}
+  .nav-links a{font-size:0.75rem}
+  .brand{font-size:1.1rem}
+  .brand .role{display:none}
+  .article-body{font-size:17px;padding:0 1.3rem 4rem}
+  .article-header,.back-link{padding:0 1.3rem}
+  .stat-row{flex-direction:column;gap:1.5rem;padding:1.5rem}
+  .pull-quote{font-size:1.25rem;padding-left:1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="brand">Judah Akinlaja <span class="divider">/</span> <span class="role">Health Data Scientist</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../portfolio.html">Portfolio</a></li>
+      <li><a href="../qualifications.html">Qualifications</a></li>
+      <li><a href="../experience.html">Experience</a></li>
+      <li><a href="../writing.html">Writing</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="back-link">
+  <a href="../writing.html">← Back to Writing</a>
+</div>
+
+<header class="article-header">
+  <div class="article-category-row">
+    <span class="cat">Essay</span>
+    <span class="sep">·</span>
+    <span class="date">1 April 2026</span>
+    <span class="sep">·</span>
+    <span class="date">8 min read</span>
+  </div>
+  <h1 class="article-h1">The Day I Got My Start Date</h1>
+  <p class="article-subtitle">What building a £1.2 billion NHS problem into a portfolio project actually taught me about data science, honest analysis, and doing the work before the role arrives.</p>
+  <div class="article-byline">
+    <div class="byline-photo"><img src="../assets/judah.jpg" alt="Judah Akinlaja"></div>
+    <div class="byline-text">
+      <span class="byline-name">Judah Akinlaja</span>
+      <span class="byline-meta">MSc Health Data Science · University of Manchester</span>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+
+<p>I passed my pre-employment checks today. The email from NHS England came in, the start date is confirmed, and in June I'll walk into the Northwest Manchester Office as a Data Analyst intern on the 10,000 Black Interns programme.</p>
+
+<p>I've been sitting with it for a few hours now, trying to write something that isn't just a gratitude post. Gratitude is there, obviously. But what I actually want to do is look back at the thing that got me here, because I think the story is more useful than the announcement.</p>
+
+<p>The thing that got me here was an NHS GP appointment no-show dataset, a lot of late nights in MySQL Workbench and Google Colab, and a finding that genuinely surprised me.</p>
+
+<h2>The problem nobody was talking about in my circle</h2>
+
+<p>Missed GP appointments cost the NHS about £1.22 billion a year. Forty point six million appointments, booked and never attended. Roughly £40 million evaporating every single month.</p>
+
+<div class="stat-row">
+  <div class="stat-item">
+    <span class="stat-num">£1.22B</span>
+    <span class="stat-label">Annual cost</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">40.6M</span>
+    <span class="stat-label">Appointments missed</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">1 in 23</span>
+    <span class="stat-label">Appointment slots wasted</span>
+  </div>
+</div>
+
+<p>When I first saw those numbers I had to re-check them. Not because they seemed wrong, but because I couldn't understand how a number that large wasn't a bigger part of the public conversation. We talk about NHS funding. We talk about waiting lists. We don't really talk about the fact that one in every twenty-three appointments ends up as a wasted slot a sick person could have filled.</p>
+
+<p>That was the hook. I wasn't chasing a Kaggle gold medal. I wanted to understand a real problem in a system I care about, using the public data NHS England already publishes every month.</p>
+
+<h2>Phase one: just SQL, and just questions</h2>
+
+<p>I started the project with MySQL and 52,855 aggregated rows covering 920 million appointments between July 2023 and November 2025. No machine learning. No fancy dashboards. Just a database, thirty-odd queries, and a list of questions I kept adding to as each answer opened up three more.</p>
+
+<p>The overall DNA rate came out at 4.42%. Fine, that's the baseline. But the moment I broke it down by appointment mode, the picture changed completely.</p>
+
+<div class="pull-quote">
+  Face-to-face appointments: 5.56% DNA rate. Video and online appointments: 0.46% DNA rate. That's a twelve-fold difference.
+</div>
+
+<p>Twelve times. I remember running the query three different ways because I didn't trust the first answer. Same result each time.</p>
+
+<p>When you sit with a number like that, it stops being a statistic and starts being a strategy. If the NHS shifted even a modest percentage of suitable face-to-face appointments to video, the reduction in wasted capacity would be measured in hundreds of millions of pounds.</p>
+
+<p>Other things fell out of the SQL work. October is consistently the worst month of the year, every year, across the three years in the data. Appointments with Other Practice Staff have nearly double the DNA rate of GP-led appointments (6.2% vs 3.2%). Routine consultations get missed almost twice as often as acute ones, because people show up when they feel ill and deprioritise preventive care.</p>
+
+<p>Each of those is an intervention waiting to be designed.</p>
+
+<h2>Phase two: Python, and where the statistics started mattering</h2>
+
+<p>Once I'd squeezed what I could out of SQL, I moved the analysis into Python. Pandas, NumPy, a lot of matplotlib and seaborn, and Google Colab for the compute.</p>
+
+<p>This is where the project stopped being description and started being analysis. I engineered features the raw data didn't have. Season. Month-over-month change in DNA rate. A <code>risk_level</code> flag splitting periods into high-risk and low-risk. A <code>months_since_start</code> variable to make time a continuous number rather than a label.</p>
+
+<p>The statistical tests were where I learned the most. A chi-square test on appointment mode against DNA status came back significant at p &lt; 0.001, with a Cramér's V of 0.073. Small effect size, but real. ANOVA across seasons confirmed autumn is genuinely different from winter, not just noisy. A t-test between high-risk and low-risk periods validated that the <code>risk_level</code> feature I'd engineered was meaningful rather than circular.</p>
+
+<p>I spent a long time on the seasonal decomposition. Splitting the monthly DNA rate into trend, seasonality, and residual made something click for me that a bar chart never did. The trend was gently downward, from about 4.75% in mid-2023 to 4.42% by late 2025. The seasonal component peaked in October every year with almost mechanical regularity. The residual was mostly small. Which is to say: the NHS is slowly improving, the October spike is predictable, and a sensible organisation would plan for it in August rather than react to it in November.</p>
+
+<h2>Phase three: the machine learning lesson I didn't expect</h2>
+
+<p>This is the part of the project I'm proudest of, and it's also the part that went least according to plan.</p>
+
+<p>I trained three models: logistic regression, random forest, XGBoost. My first attempt at logistic regression gave me 93% accuracy and I got briefly very excited. Then I actually looked at what the model was using to predict, and realised I'd left the appointments volume column in the features. The model was essentially learning "high-volume rows tend to have more DNAs in absolute terms", which was data leakage dressed up as performance.</p>
+
+<div class="pull-quote">
+  A year ago that result would have disappointed me. Now I think it's the most useful finding in the whole project.
+</div>
+
+<p>Pulled the column out. Re-ran everything. Accuracy dropped to 56%. ROC-AUC of 0.57. Recall on the DNA class of 59% with <code>class_weight='balanced'</code>.</p>
+
+<p>Random forest scored worse. XGBoost scored about the same on accuracy but collapsed on DNA recall down to 15%. Logistic regression, the simplest model in the set, was the best.</p>
+
+<p>What a 56% accuracy on aggregated categorical data is really telling you is: <strong>you cannot predict individual patient no-shows from service-level features alone.</strong> You need patient-level data. Booking lead time. Prior DNA history. Distance from the practice. Time of day. Deprivation index. None of that is in the public NHS Digital release, and for good reason.</p>
+
+<p>So the model isn't the product. The diagnosis is. If the NHS wanted to build a real risk-scoring system for appointments, the bottleneck is not algorithms, it's the data architecture that would let appointment-level records flow into a model without compromising patient confidentiality. That's a very different conversation from "let's try XGBoost with more trees".</p>
+
+<h2>What this work actually did for me</h2>
+
+<p>I started this project to have something real to point at. A reason for a recruiter to read past the top of my CV. What I didn't expect was how much it would sharpen the way I think.</p>
+
+<p>It taught me to distrust my own first result. 93% accuracy felt amazing for about four minutes, and then it became a lesson I'll carry into every model I ever build.</p>
+
+<p>It taught me that the interesting question in applied data science is rarely "which algorithm wins". It's <em>"what does the winning algorithm's ceiling tell us about the data we do and don't have?"</em></p>
+
+<p>It taught me that a good finding is one you can explain to a non-technical person and see them sit up straighter. The twelve-fold difference between video and face-to-face appointments did that every single time I mentioned it. People who had never heard the phrase "DNA rate" in their life immediately understood why it mattered.</p>
+
+<p>And it taught me that work done for your own curiosity has a different texture than work done for a grade. I wasn't optimising for marks. I was trying to answer a question that genuinely bothered me.</p>
+
+<h2>The bridge to June</h2>
+
+<p>When I interviewed for the NHS England internship, the DNA project was the thing I kept coming back to. Not because the model was impressive, because it wasn't. Because the shape of the work matched the shape of what NHS data teams actually do. Start with a real operational problem. Interrogate the data honestly. Be willing to say the model doesn't work and explain why that's still useful. Translate the finding into something a manager can act on.</p>
+
+<p>That framing is what I'll carry into the Northwest Manchester Office in June. I don't know yet what I'll be working on. I do know the dissertation I'm running in parallel — unsupervised clustering of lung disease patient phenotypes with Dr Jenkins — will stretch a different set of muscles, and I'll need both.</p>
+
+<p>Today I got a start date. What I'm actually celebrating is that the work I did on my own time, with free tools and public data, turned out to be the most honest preparation I could have done.</p>
+
+<p>If you're somewhere in the middle of a project that feels slow and unglamorous, keep going. The 93% accuracy that turned out to be a bug taught me more than any clean result ever did. Real skill is built on the ones that don't work on the first try.</p>
+
+<div class="article-end">· · ·</div>
+
+<div class="author-footer">
+  Judah Akinlaja is an MSc Health Data Science student at the University of Manchester and an incoming Data Analyst intern at NHS England. The full DNA project is available on <a href="https://github.com/Akinlajar/nhs-appointment-noshow-predictor" target="_blank" rel="noopener">GitHub →</a>
+</div>
+
+</article>
+
+<div class="continue-reading">
+  <div class="label">Continue Reading</div>
+  <a href="../writing.html" class="home-btn">Back to All Writing →</a>
+</div>
+
+<footer>© 2026 <span class="accent">Judah Akinlaja</span> · Health Data Scientist · Manchester, UK</footer>
+
+</body>
+</html>
