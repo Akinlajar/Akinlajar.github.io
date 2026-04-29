@@ -417,6 +417,87 @@ footer .accent{
   .stat-row{flex-direction:column;gap:1.5rem;padding:1.5rem}
   .pull-quote{font-size:1.25rem;padding-left:1rem}
 }
+
+/* === Dark Mode === */
+body.dark-mode{
+  --paper:#1a1a2e;
+  --cream:#242440;
+  --cream-warm:#2a2a48;
+  --cream-dark:#1e1e36;
+  --text:#d4cfc4;
+  --text-dim:#9a9488;
+  --ink:#e8e0cc;
+  --ink-soft:#c8c0b0;
+  --rule:#3a3a55;
+  --navy-deep:#0a0f1e;
+  --navy:#101830;
+  --navy-light:#182040;
+}
+body.dark-mode::before{opacity:0.015}
+body.dark-mode nav{background:var(--paper);border-bottom-color:var(--rule)}
+body.dark-mode .brand{color:var(--gold-light)}
+body.dark-mode .nav-links a{color:#b8b0a0}
+body.dark-mode .nav-links a:hover{color:var(--gold-light)}
+body.dark-mode .section-title{color:var(--gold-light)}
+body.dark-mode .project-card{background:var(--cream);border-color:var(--rule)}
+body.dark-mode .project-card:hover{background:var(--cream-warm);border-color:var(--gold-dark)}
+body.dark-mode .project-name{color:var(--gold-light)}
+body.dark-mode .project-tools{border-top-color:var(--rule)}
+body.dark-mode .project-tools strong{color:var(--gold-light)}
+body.dark-mode .project-link{color:var(--gold);border-color:var(--gold-dark)}
+body.dark-mode .project-link:hover{background:var(--gold-dark);color:var(--paper)}
+body.dark-mode .article-card{background:var(--cream);border-color:var(--rule)}
+body.dark-mode .article-card:hover{background:var(--cream-warm)}
+body.dark-mode .article-title{color:var(--gold-light)}
+body.dark-mode .article-category{color:var(--gold)}
+body.dark-mode .skill-group{background:var(--cream);border-color:var(--rule)}
+body.dark-mode .skill-group:hover{border-color:var(--gold-dark)}
+body.dark-mode .skill-group-title{color:var(--gold-light)}
+body.dark-mode .skill-chip{background:var(--paper);border-color:var(--rule);color:var(--text)}
+body.dark-mode .skill-chip:hover{background:var(--gold-dark);border-color:var(--gold-dark);color:var(--paper)}
+body.dark-mode .timeline-role{color:var(--gold-light)}
+body.dark-mode .timeline-place{color:var(--text-dim)}
+body.dark-mode .lens-card{background:var(--cream);border-color:var(--rule);border-left-color:var(--gold-dark)}
+body.dark-mode .lens-card:hover{background:var(--cream-warm);border-left-color:var(--gold)}
+body.dark-mode .lens-card h3{color:var(--gold-light)}
+body.dark-mode .anchor-btn{background:var(--gold-dark);border-color:var(--gold-dark);color:var(--paper)}
+body.dark-mode .anchor-btn.secondary{background:transparent;color:var(--gold);border-color:var(--gold-dark)}
+body.dark-mode .anchor-btn.secondary:hover{background:var(--gold-dark);color:var(--paper)}
+body.dark-mode .more-repos{background:var(--cream);border-color:var(--rule)}
+body.dark-mode .more-repos a{background:var(--gold-dark);color:var(--paper)}
+body.dark-mode .contact-block{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%)}
+body.dark-mode footer{border-top-color:var(--rule)}
+body.dark-mode .placeholder-card{border-color:var(--rule);color:var(--text-dim);background:rgba(36,36,64,0.3)}
+body.dark-mode .hero h1{color:var(--gold-light)}
+body.dark-mode .section-subtitle{color:var(--text-dim)}
+
+/* Theme toggle button */
+.theme-toggle{
+  background:none;
+  border:1px solid var(--rule);
+  border-radius:4px;
+  width:36px;
+  height:36px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold-dark);
+  transition:all 0.25s;
+  padding:0;
+  flex-shrink:0;
+}
+.theme-toggle:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+  background:rgba(200,169,100,0.08);
+}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle .sun{display:none}
+.theme-toggle .moon{display:block}
+body.dark-mode .theme-toggle .sun{display:block}
+body.dark-mode .theme-toggle .moon{display:none}
+
 </style>
 </head>
 <body>
@@ -432,6 +513,10 @@ footer .accent{
       <li><a href="../writing.html">Writing</a></li>
       <li><a href="../index.html#contact">Contact</a></li>
     </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
   </div>
 </nav>
 
@@ -597,5 +682,17 @@ footer .accent{
 
 <footer>© 2026 <span class="accent">Judah Akinlaja</span> · Health Data Scientist · Manchester, UK</footer>
 
+<script>
+function toggleTheme(){
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch(e) {}
+}
+(function(){
+  try {
+    if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
