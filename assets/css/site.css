@@ -1101,6 +1101,19 @@ body.simple { background: var(--bg); }
 [data-theme="dark"] .note-status.ok{color:#4FD1B5}
 @media (max-width:820px){.note-wrap{grid-template-columns:1fr;gap:32px}.note-row{grid-template-columns:1fr}}
 .note-form input:not(.hp),.note-form select{height:52px;box-sizing:border-box}
-/* soften hero photo */
-.hero-visual .photo::after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(31,10,48,.18)}
-.hero-visual .photo img{filter:blur(1px) saturate(.9)}
+
+/* ---------- hero: red, white and black (option A) ---------- */
+.hero-copy .eyebrow{color:#F87171}
+.hero-copy h1{color:#FFFFFF}
+.hero-stat{border-top-color:rgba(255,255,255,.18)}
+.hero-stat strong{color:#FFFFFF}
+.hero-stat span{color:#C9C9CE}
+.hero-block .btn-dark{background:#DC2626;border-color:#DC2626;color:#FFFFFF}
+.hero-block .btn-dark .icon{color:#FFFFFF}
+.hero-block .btn-dark:hover{background:#B91C1C;border-color:#B91C1C}
+.circle-link .ring{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35);color:#fff}
+.circle-link:hover .ring{background:#FFFFFF;color:#0B0B0D}
+.hero-card{background:#FFFFFF;color:#0B0B0D;border-left:4px solid #DC2626}
+.hero-card span{color:#52525B}
+.hero-block{background:radial-gradient(ellipse at 100% 0%,rgba(220,38,38,.35),transparent 50%),linear-gradient(145deg,#1A1A1D 0%,#0E0E10 60%,#0A0A0B 100%)}
+.hero-visual .frame{background:linear-gradient(150deg,#EF4444 0%,#B91C1C 100%);border:2px solid #FFFFFF}
