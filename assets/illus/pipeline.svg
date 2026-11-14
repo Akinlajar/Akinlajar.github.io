@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-label="Data flowing from a hospital through the cloud to charts">
+<rect width="600" height="400" rx="28" fill="#F4F4F5"/>
+<path d="M60 330h480" stroke="#D4D4D8" stroke-width="4" stroke-linecap="round"/>
+<!-- hospital -->
+<rect x="56" y="170" width="130" height="160" rx="10" fill="#FFFFFF" stroke="#0B0B0D" stroke-width="4"/>
+<rect x="86" y="130" width="70" height="44" rx="8" fill="#0B0B0D"/><path d="M121 140v24M109 152h24" stroke="#C99A2E" stroke-width="7" stroke-linecap="round"/>
+<g fill="#E4E4E7"><rect x="74" y="192" width="24" height="22" rx="4"/><rect x="109" y="192" width="24" height="22" rx="4"/><rect x="144" y="192" width="24" height="22" rx="4"/><rect x="74" y="228" width="24" height="22" rx="4"/><rect x="144" y="228" width="24" height="22" rx="4"/></g>
+<rect x="109" y="228" width="24" height="22" rx="4" fill="#C99A2E"/><rect x="104" y="280" width="34" height="50" rx="6" fill="#0B0B0D"/>
+<!-- pipeline blocks -->
+<path d="M190 250c40 0 40-110 90-110" fill="none" stroke="#0B0B0D" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>
+<rect x="204" y="214" width="22" height="22" rx="5" fill="#C99A2E"/><rect x="232" y="168" width="22" height="22" rx="5" fill="#0B0B0D"/><rect x="252" y="130" width="22" height="22" rx="5" fill="#DC2626"/>
+<!-- cloud -->
+<path d="M262 150a44 44 0 0 1 84-18 36 36 0 0 1 50 34 30 30 0 0 1-8 60H270a38 38 0 0 1-8-76z" fill="#FFFFFF" stroke="#0B0B0D" stroke-width="4" stroke-linejoin="round"/>
+<ellipse cx="322" cy="160" rx="26" ry="9" fill="#C99A2E"/><path d="M296 160v30c0 5 12 9 26 9s26-4 26-9v-30" fill="none" stroke="#0B0B0D" stroke-width="4"/><path d="M296 175c0 5 12 9 26 9s26-4 26-9" fill="none" stroke="#0B0B0D" stroke-width="4"/>
+<path d="M400 200c40 0 30 40 62 40" fill="none" stroke="#0B0B0D" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>
+<!-- screen -->
+<rect x="416" y="210" width="140" height="96" rx="10" fill="#0B0B0D"/><rect x="474" y="306" width="24" height="16" fill="#0B0B0D"/><rect x="452" y="320" width="68" height="8" rx="4" fill="#0B0B0D"/>
+<path d="M432 286h16v-8h14v-10h14l10-30 12 44 8-16h30" fill="none" stroke="#C99A2E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="520" cy="96" r="30" fill="#C99A2E" opacity=".3"/><circle cx="80" cy="76" r="14" fill="#0B0B0D" opacity=".08"/>
+</svg>
