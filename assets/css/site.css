@@ -1162,3 +1162,15 @@ body.simple { background: var(--bg); }
 .illus{display:block;width:100%;height:auto;border-radius:24px}
 .illus-wide{margin:0 0 32px}
 @media (max-width:900px){.sol-head{grid-template-columns:1fr;gap:22px}.sol-head h2{font-size:32px}.sol-head .illus{max-width:420px}}
+
+/* v13: picked illustrations */
+.illus-card{background:#FAF8F3;padding:22px;box-sizing:border-box}
+.illus-photo{object-fit:cover;aspect-ratio:21/9}
+.illus-banner{margin:0 0 44px}
+.illus-mid{max-width:440px;margin:6px auto 26px}
+.skills-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.d3{display:inline-flex;gap:6px;align-items:center}
+.d3 img{width:46px;height:46px;display:block}
+.d3-band{display:flex;margin-bottom:16px}
+.d3-band img{width:56px;height:56px}
+@media (max-width:720px){.d3 img{width:38px;height:38px}.d3-band img{width:46px;height:46px}.illus-photo{aspect-ratio:16/9}}
